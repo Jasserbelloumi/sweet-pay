@@ -12,35 +12,44 @@
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- ══ NAV ══ -->
   <nav class="cnav">
     <div class="cnav__inner">
       <a href="index.html" class="cnav__logo">
         <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="url(#nl)"/><path d="M10 16.5C10 13.462 12.462 11 15.5 11H19a3 3 0 010 6h-3.5a1.5 1.5 0 000 3H19" stroke="#fff" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="nl" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>
         Sweet<strong>Pay</strong>
       </a>
-      <div class="cnav__user" id="nav-user">
-        <div class="cnav__avatar" id="nav-avatar"></div>
-        <span id="nav-name"></span>
+      <div class="cnav__right">
+        <button class="cnav__profile-btn" id="profile-btn" title="Edit profile">
+          <div class="cnav__avatar" id="nav-avatar"></div>
+          <span id="nav-name"></span>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
         <button class="cnav__logout" id="logout-btn" title="Sign out">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 14H3a1 1 0 01-1-1V3a1 1 0 011-1h3M10 11l3-3-3-3M13 8H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M6 14H3a1 1 0 01-1-1V3a1 1 0 011-1h3M10 11l3-3-3-3M13 8H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Sign out
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- MAIN -->
+  <!-- ══ MAIN ══ -->
   <main class="cmain">
     <div class="cmain__container">
 
-      <!-- Greeting -->
+      <!-- Greeting + ID badge -->
       <div class="greeting">
         <div>
           <h1 class="greeting__title">Hello, <span id="greeting-name" class="g-text"></span></h1>
-          <p class="greeting__sub">Your Sweet Pay virtual card is ready below.</p>
+          <div class="greeting__id-row">
+            <span class="greeting__id-label">Account ID</span>
+            <span class="greeting__id" id="greeting-id"></span>
+            <button class="copy-id-btn" id="copy-id-btn" title="Copy ID">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </button>
+          </div>
         </div>
-        <div class="greeting__badge" id="status-badge">
+        <div class="greeting__badge">
           <span class="gbadge gbadge--pending" id="card-status-badge">
             <span class="gbadge__dot"></span> Inactive — Activation Required
           </span>
@@ -49,10 +58,8 @@
 
       <div class="card-layout">
 
-        <!-- LEFT: Card + Details -->
+        <!-- ══ LEFT: Card + Details ══ -->
         <div class="card-left">
-
-          <!-- Virtual Card -->
           <div class="vcard" id="vcard">
             <div class="vcard__shine"></div>
             <div class="vcard__top">
@@ -77,28 +84,26 @@
               </div>
               <svg width="44" height="28" viewBox="0 0 42 26" fill="none"><circle cx="16" cy="13" r="13" fill="#eb001b" opacity=".9"/><circle cx="26" cy="13" r="13" fill="#f79e1b" opacity=".9"/></svg>
             </div>
-            <!-- Inactive overlay -->
             <div class="vcard__overlay" id="card-overlay">
               <div class="vcard__overlay-icon">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="6" y="16" width="24" height="16" rx="3" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/><path d="M11 16v-5a7 7 0 0114 0v5" stroke="rgba(255,255,255,.35)" stroke-width="1.5" stroke-linecap="round"/><circle cx="18" cy="24" r="2.5" fill="rgba(255,255,255,.4)"/></svg>
+                <svg width="34" height="34" viewBox="0 0 36 36" fill="none"><rect x="6" y="16" width="24" height="16" rx="3" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/><path d="M11 16v-5a7 7 0 0114 0v5" stroke="rgba(255,255,255,.35)" stroke-width="1.5" stroke-linecap="round"/><circle cx="18" cy="24" r="2.5" fill="rgba(255,255,255,.4)"/></svg>
               </div>
               <span>Inactive</span>
             </div>
           </div>
 
-          <!-- Card info -->
           <div class="card-info-grid">
             <div class="cig-item">
               <span class="cig-label">Card Number</span>
               <span class="cig-val" id="info-number">—</span>
             </div>
             <div class="cig-item">
-              <span class="cig-label">Card Type</span>
-              <span class="cig-val">Virtual Mastercard</span>
+              <span class="cig-label">Account ID</span>
+              <span class="cig-val" id="info-id">—</span>
             </div>
             <div class="cig-item">
-              <span class="cig-label">Currency</span>
-              <span class="cig-val">SWP / USD</span>
+              <span class="cig-label">Card Type</span>
+              <span class="cig-val">Virtual Mastercard</span>
             </div>
             <div class="cig-item">
               <span class="cig-label">Status</span>
@@ -107,7 +112,7 @@
           </div>
         </div>
 
-        <!-- RIGHT: Activation Panel -->
+        <!-- ══ RIGHT: Activation Panel ══ -->
         <div class="card-right">
           <div class="activation-panel" id="activation-panel">
             <div class="ap-header">
@@ -133,14 +138,16 @@
               <div class="ap-includes__list">
                 <div class="ap-inc-item"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="rgba(16,185,129,.15)"/><path d="M5 8l2 2 4-4" stroke="#10b981" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg> Full card activation</div>
                 <div class="ap-inc-item"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="rgba(16,185,129,.15)"/><path d="M5 8l2 2 4-4" stroke="#10b981" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg> SWC → SWP exchange</div>
-                <div class="ap-inc-item"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="rgba(16,185,129,.15)"/><path d="M5 8l2 2 4-4" stroke="#10b981" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg> Online payments support</div>
+                <div class="ap-inc-item"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="rgba(16,185,129,.15)"/><path d="M5 8l2 2 4-4" stroke="#10b981" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg> Online payments</div>
                 <div class="ap-inc-item"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="rgba(16,185,129,.15)"/><path d="M5 8l2 2 4-4" stroke="#10b981" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg> Priority support</div>
               </div>
             </div>
 
-            <!-- Payment method selector -->
-            <div class="ap-section-label">Choose payment method</div>
+            <!-- Method selector -->
+            <div class="ap-section-label">اختر طريقة الدفع</div>
             <div class="ap-methods">
+
+              <!-- FLEXI -->
               <button class="apm-btn" id="btn-flexi" onclick="selectMethod('flexi')">
                 <div class="apm-icon apm-icon--flexi">F</div>
                 <div class="apm-info">
@@ -149,46 +156,114 @@
                 </div>
                 <div class="apm-check" id="chk-flexi"></div>
               </button>
-              <button class="apm-btn" id="btn-baridi" onclick="selectMethod('baridi')">
+
+              <!-- BARIDIMOB -->
+              <button class="apm-btn apm-btn--unavail" disabled>
                 <div class="apm-icon apm-icon--baridi">B</div>
                 <div class="apm-info">
                   <span class="apm-name">BaridiMob</span>
-                  <span class="apm-sub">بريد موب</span>
+                  <span class="apm-sub apm-sub--unavail">غير متوفر الآن</span>
                 </div>
-                <div class="apm-check" id="chk-baridi"></div>
+                <div class="apm-unavail-badge">قريباً</div>
               </button>
+
             </div>
 
-            <!-- Payment instructions (shown after selection) -->
+            <!-- Flexi Instructions -->
             <div class="ap-instructions" id="ap-instructions" hidden>
-              <div class="api-header" id="api-header"></div>
-              <div class="api-amount">
-                <span>Amount to send</span>
-                <strong id="api-amount-val"></strong>
+              <div class="api-header">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f59e0b" stroke-width="1.4"/><path d="M6.5 10l2.5 2.5 5-5" stroke="#f59e0b" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                كيفية الدفع عبر <strong>Flexi</strong>
               </div>
-              <div class="api-accounts" id="api-accounts"></div>
-              <p class="api-note" id="api-note"></p>
+              <div class="api-amount">
+                <span>المبلغ المطلوب إرساله</span>
+                <strong>1,050 DZD (~$6.99)</strong>
+              </div>
+              <div class="api-acc">
+                <span class="api-acc__label">رقم الهاتف (Flexi)</span>
+                <span class="api-acc__val copy-val" data-copy="0676692779">
+                  0676692779
+                  <button class="inline-copy" onclick="copyText('0676692779',this)" title="نسخ">
+                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                  </button>
+                </span>
+              </div>
+              <div class="api-acc">
+                <span class="api-acc__label">اسم الحساب</span>
+                <span class="api-acc__val">Sweet Pay DZ</span>
+              </div>
+              <p class="api-note">بعد إتمام التحويل، أكمل النموذج أدناه وسيتم تفعيل بطاقتك خلال 30 دقيقة.</p>
             </div>
 
-            <button class="ap-confirm-btn" id="ap-confirm-btn" hidden onclick="confirmPayment()">
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span id="confirm-btn-text">I've Sent the Payment — Activate My Card</span>
-            </button>
+            <!-- ══ Deposit Form ══ -->
+            <div class="deposit-form-wrap" id="deposit-form-wrap" hidden>
+              <div class="df-title">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M3 8h14M7 4h6M5 12h10M7 16h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                بيانات الإيداع
+              </div>
+              <form id="deposit-form" class="deposit-form" novalidate>
+
+                <div class="df-row">
+                  <div class="df-field">
+                    <label>الاسم واللقب *</label>
+                    <input type="text" id="df-name" placeholder="الاسم الكامل"/>
+                    <span class="df-err" id="df-name-err"></span>
+                  </div>
+                  <div class="df-field">
+                    <label>رقم الهاتف *</label>
+                    <input type="tel" id="df-phone" placeholder="06XXXXXXXX"/>
+                    <span class="df-err" id="df-phone-err"></span>
+                  </div>
+                </div>
+
+                <div class="df-row">
+                  <div class="df-field">
+                    <label>البريد الإلكتروني *</label>
+                    <input type="email" id="df-email" placeholder="you@example.com"/>
+                    <span class="df-err" id="df-email-err"></span>
+                  </div>
+                  <div class="df-field">
+                    <label>المبلغ المُودَع (DZD) *</label>
+                    <input type="number" id="df-amount" placeholder="1050"/>
+                    <span class="df-err" id="df-amount-err"></span>
+                  </div>
+                </div>
+
+                <div class="df-field">
+                  <label>وقت الإيداع بالضبط *</label>
+                  <input type="datetime-local" id="df-time"/>
+                  <span class="df-err" id="df-time-err"></span>
+                </div>
+
+                <div class="df-field">
+                  <label>رقم المعاملة أو رمز الإيصال *</label>
+                  <input type="text" id="df-txid" placeholder="مثال: TXN-123456 أو رقم من الإيصال"/>
+                  <span class="df-err" id="df-txid-err"></span>
+                </div>
+
+                <div class="df-global-err" id="df-global-err"></div>
+
+                <button type="submit" class="ap-confirm-btn" id="df-submit-btn">
+                  <svg width="17" height="17" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span id="df-btn-text">تأكيد الإيداع وتفعيل البطاقة</span>
+                </button>
+              </form>
+            </div>
 
             <div class="ap-security">
               <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l5 2v4.5c0 3-5 6.5-5 6.5S3 11 3 8V3.5l5-2z" stroke="currentColor" stroke-width="1.2"/></svg>
-              Your card details are secured with 256-bit encryption. Activation is processed within 30 minutes.
+              بياناتك محمية بتشفير 256-bit. يتم تفعيل البطاقة خلال 30 دقيقة من التحقق.
             </div>
           </div>
 
-          <!-- Activated state (hidden by default) -->
+          <!-- Activated state -->
           <div class="activated-panel" id="activated-panel" hidden>
             <div class="act-icon">
               <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="url(#aclg)"/><path d="M16 26l7 7 13-14" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="aclg" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse"><stop stop-color="#10b981"/><stop offset="1" stop-color="#059669"/></linearGradient></defs></svg>
             </div>
-            <h2>Card Activated!</h2>
-            <p>Your Sweet Pay virtual card is active and ready to use for SweetCoin exchanges and online payments.</p>
-            <a href="index.html" class="act-btn">Go to Exchange</a>
+            <h2>البطاقة مفعّلة!</h2>
+            <p>بطاقتك الافتراضية Sweet Pay نشطة وجاهزة للاستخدام في تبادل SweetCoin والمدفوعات الإلكترونية.</p>
+            <a href="index.html" class="act-btn">الذهاب إلى الصفحة الرئيسية</a>
           </div>
         </div>
 
@@ -196,108 +271,277 @@
     </div>
   </main>
 
+  <!-- ══ PROFILE MODAL ══ -->
+  <div class="profile-modal" id="profile-modal" hidden>
+    <div class="pm-backdrop" onclick="closeProfile()"></div>
+    <div class="pm-card">
+      <div class="pm-header">
+        <h3>تعديل الملف الشخصي</h3>
+        <button class="pm-close" onclick="closeProfile()">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <form id="profile-form" class="pm-form" novalidate>
+        <div class="pm-avatar-row">
+          <div class="pm-big-avatar" id="pm-avatar"></div>
+          <div>
+            <div class="pm-id-label">Account ID</div>
+            <div class="pm-id-val" id="pm-id-val"></div>
+          </div>
+        </div>
+        <div class="df-field">
+          <label>الاسم الكامل *</label>
+          <input type="text" id="pm-name" placeholder="الاسم الكامل"/>
+          <span class="df-err" id="pm-name-err"></span>
+        </div>
+        <div class="df-field">
+          <label>البريد الإلكتروني *</label>
+          <input type="email" id="pm-email" placeholder="you@example.com"/>
+          <span class="df-err" id="pm-email-err"></span>
+        </div>
+        <div class="df-field">
+          <label>كلمة المرور الحالية (مطلوبة للحفظ) *</label>
+          <input type="password" id="pm-pw" placeholder="أدخل كلمة المرور للتأكيد"/>
+          <span class="df-err" id="pm-pw-err"></span>
+        </div>
+        <div class="pm-global-err" id="pm-global-err"></div>
+        <button type="submit" class="pm-save-btn" id="pm-save-btn">
+          <span id="pm-btn-text">حفظ التغييرات</span>
+          <span id="pm-btn-ldr" hidden>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="af-spin"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2.5" stroke-dasharray="40" stroke-dashoffset="15" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ══ TOAST ══ -->
+  <div class="sp-toast" id="sp-toast"></div>
+
   <script>
-  /* ── Session check ── */
-  const session = JSON.parse(localStorage.getItem('sp_session') || 'null');
+  /* ════════════════ SESSION CHECK ════════════════ */
+  let session = JSON.parse(localStorage.getItem('sp_session') || 'null');
   if (!session) { location.href = 'login.html'; }
 
-  /* ── Fill UI ── */
+  /* ════════════════ HELPERS ════════════════ */
+  async function hashPw(pw) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+  function getUsers() { return JSON.parse(localStorage.getItem('sp_users') || '[]'); }
+  function saveUsers(u) { localStorage.setItem('sp_users', JSON.stringify(u)); }
+
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('sp-toast');
+    const icon = type === 'success'
+      ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#10b981"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      : '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#ef4444"/><path d="M7 7l6 6M13 7l-6 6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>';
+    t.innerHTML = icon + `<span>${msg}</span>`;
+    t.className = 'sp-toast sp-toast--show';
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.className = 'sp-toast'; }, 5000);
+  }
+
+  window.copyText = function(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✓';
+      btn.style.color = '#10b981';
+      setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 2000);
+    });
+  };
+
+  /* ════════════════ FILL UI ════════════════ */
   const firstName = session ? session.name.split(' ')[0] : '';
-  const initials = session ? session.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase() : '';
-  const expiry = (() => { const d = new Date(); d.setFullYear(d.getFullYear()+3); return `${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getFullYear()).slice(-2)}`; })();
+  const initials  = session ? session.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase() : '';
+  const expiry    = (() => { const d = new Date(); d.setFullYear(d.getFullYear()+3); return `${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getFullYear()).slice(-2)}`; })();
 
   if (session) {
-    document.getElementById('greeting-name').textContent = firstName;
-    document.getElementById('nav-name').textContent = session.name;
-    document.getElementById('nav-avatar').textContent = initials;
-    document.getElementById('card-number').textContent = session.cardNum || '•••• •••• •••• ••••';
-    document.getElementById('card-holder').textContent = session.name.toUpperCase();
-    document.getElementById('card-expiry').textContent = expiry;
-    document.getElementById('info-number').textContent = session.cardNum || '—';
+    document.getElementById('greeting-name').textContent  = firstName;
+    document.getElementById('greeting-id').textContent    = '#' + (session.id || '—');
+    document.getElementById('nav-name').textContent       = session.name;
+    document.getElementById('nav-avatar').textContent     = initials;
+    document.getElementById('card-number').textContent    = session.cardNum || '•••• •••• •••• ••••';
+    document.getElementById('card-holder').textContent    = session.name.toUpperCase();
+    document.getElementById('card-expiry').textContent    = expiry;
+    document.getElementById('info-number').textContent    = session.cardNum || '—';
+    document.getElementById('info-id').textContent        = '#' + (session.id || '—');
+
+    // Pre-fill deposit form email
+    const dfEmail = document.getElementById('df-email');
+    if (dfEmail) dfEmail.value = session.email;
 
     if (session.cardActivated) {
-      document.getElementById('card-overlay').hidden = true;
+      document.getElementById('card-overlay').hidden    = true;
       document.getElementById('vcard').classList.add('vcard--active');
-      document.getElementById('card-status-badge').className = 'gbadge gbadge--active';
-      document.getElementById('card-status-badge').innerHTML = '<span class="gbadge__dot"></span> Active';
-      document.getElementById('info-status').textContent = 'Active';
-      document.getElementById('info-status').className = 'cig-val cig-val--active';
-      document.getElementById('activation-panel').hidden = true;
-      document.getElementById('activated-panel').hidden = false;
+      document.getElementById('card-status-badge').className   = 'gbadge gbadge--active';
+      document.getElementById('card-status-badge').innerHTML   = '<span class="gbadge__dot"></span> Active';
+      document.getElementById('info-status').textContent       = 'Active';
+      document.getElementById('info-status').className         = 'cig-val cig-val--active';
+      document.getElementById('activation-panel').hidden       = true;
+      document.getElementById('activated-panel').hidden        = false;
     }
   }
 
-  /* ── Logout ── */
+  /* ════════════════ COPY ID ════════════════ */
+  document.getElementById('copy-id-btn').addEventListener('click', function() {
+    navigator.clipboard.writeText(session.id || '').then(() => {
+      this.style.color = '#10b981';
+      setTimeout(() => { this.style.color = ''; }, 2000);
+      showToast('تم نسخ الـ ID بنجاح!');
+    });
+  });
+
+  /* ════════════════ LOGOUT ════════════════ */
   document.getElementById('logout-btn').addEventListener('click', () => {
     localStorage.removeItem('sp_session');
     location.href = 'index.html';
   });
 
-  /* ── Payment method selection ── */
-  const methods = {
-    flexi: {
-      header: '<svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f59e0b" stroke-width="1.4"/><path d="M6.5 10l2.5 2.5 5-5" stroke="#f59e0b" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> How to pay via <strong>Flexi</strong>',
-      amount: '1,050 DZD (~$6.99)',
-      accounts: [
-        { label: 'CCP Account', value: 'تضاف لاحقاً — سيتم التحديث قريباً' },
-        { label: 'Account Name', value: 'Sweet Pay DZ' },
-      ],
-      note: 'After completing the transfer, click the button below. Your card will be activated within 30 minutes.'
-    },
-    baridi: {
-      header: '<svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f59e0b" stroke-width="1.4"/><path d="M6.5 10l2.5 2.5 5-5" stroke="#f59e0b" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> How to pay via <strong>BaridiMob</strong>',
-      amount: '1,050 DZD (~$6.99)',
-      accounts: [
-        { label: 'RIP Number', value: 'تضاف لاحقاً — سيتم التحديث قريباً' },
-        { label: 'Account Name', value: 'Sweet Pay DZ' },
-      ],
-      note: 'Open BaridiMob → Transfer → By RIP, then send the amount above. After sending, click the button below.'
-    }
-  };
-
-  let selectedMethod = null;
-
+  /* ════════════════ PAYMENT METHOD ════════════════ */
   window.selectMethod = function(m) {
-    selectedMethod = m;
-    ['flexi','baridi'].forEach(k => {
-      document.getElementById(`btn-${k}`).classList.toggle('active', k === m);
-      document.getElementById(`chk-${k}`).innerHTML = k === m
-        ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#f59e0b"/><path d="M4.5 8l2.5 2.5 5-5" stroke="#0a0700" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-        : '';
+    document.getElementById('btn-flexi').classList.toggle('active', m === 'flexi');
+    document.getElementById('chk-flexi').innerHTML = m === 'flexi'
+      ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#f59e0b"/><path d="M4.5 8l2.5 2.5 5-5" stroke="#0a0700" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      : '';
+    document.getElementById('ap-instructions').hidden  = false;
+    document.getElementById('deposit-form-wrap').hidden = false;
+  };
+
+  /* ════════════════ DEPOSIT FORM ════════════════ */
+  document.getElementById('deposit-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let ok = true;
+    const fields = [
+      { id:'df-name',  err:'df-name-err',  msg:'أدخل الاسم واللقب', test: v => v.length >= 2 },
+      { id:'df-phone', err:'df-phone-err', msg:'أدخل رقم الهاتف',   test: v => v.length >= 9 },
+      { id:'df-email', err:'df-email-err', msg:'أدخل البريد الإلكتروني', test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      { id:'df-amount',err:'df-amount-err',msg:'أدخل المبلغ',       test: v => Number(v) > 0 },
+      { id:'df-time',  err:'df-time-err',  msg:'حدد وقت الإيداع',   test: v => v.length > 0 },
+      { id:'df-txid',  err:'df-txid-err',  msg:'أدخل رقم المعاملة أو رمز الإيصال', test: v => v.length >= 3 },
+    ];
+    fields.forEach(f => {
+      const el  = document.getElementById(f.id);
+      const err = document.getElementById(f.err);
+      const val = el ? el.value.trim() : '';
+      if (!f.test(val)) { if(err) err.textContent = f.msg; ok = false; }
+      else               { if(err) err.textContent = ''; }
     });
-    const data = methods[m];
-    document.getElementById('api-header').innerHTML = data.header;
-    document.getElementById('api-amount-val').textContent = data.amount;
-    document.getElementById('api-accounts').innerHTML = data.accounts.map(a =>
-      `<div class="api-acc"><span class="api-acc__label">${a.label}</span><span class="api-acc__val">${a.value}</span></div>`
-    ).join('');
-    document.getElementById('api-note').textContent = data.note;
-    document.getElementById('ap-instructions').hidden = false;
-    document.getElementById('ap-confirm-btn').hidden = false;
-  };
 
-  window.confirmPayment = function() {
-    const btn = document.getElementById('ap-confirm-btn');
-    const txt = document.getElementById('confirm-btn-text');
-    txt.textContent = 'Verifying payment…';
+    if (!ok) return;
+
+    const btn  = document.getElementById('df-submit-btn');
+    const btxt = document.getElementById('df-btn-text');
     btn.disabled = true;
-    btn.style.opacity = '0.7';
+    if(btxt) btxt.textContent = 'جارٍ الإرسال…';
+
+    // Save deposit request locally
+    const deposits = JSON.parse(localStorage.getItem('sp_deposits') || '[]');
+    deposits.push({
+      userId:    session.id,
+      userName:  session.name,
+      userEmail: session.email,
+      name:      document.getElementById('df-name').value.trim(),
+      phone:     document.getElementById('df-phone').value.trim(),
+      email:     document.getElementById('df-email').value.trim(),
+      amount:    document.getElementById('df-amount').value.trim(),
+      time:      document.getElementById('df-time').value,
+      txid:      document.getElementById('df-txid').value.trim(),
+      method:    'flexi',
+      status:    'pending',
+      submittedAt: new Date().toISOString(),
+    });
+    localStorage.setItem('sp_deposits', JSON.stringify(deposits));
+
     setTimeout(() => {
-      showToast('Payment received! Your card will be activated within 30 minutes.');
-      btn.textContent = 'Pending verification…';
-    }, 1500);
+      showToast('تم استلام طلبك! سيتم تفعيل البطاقة خلال 30 دقيقة.');
+      document.getElementById('deposit-form-wrap').innerHTML =
+        `<div class="df-pending-msg">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="21" fill="rgba(245,158,11,.12)"/><path d="M21 13v8l5 5" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <strong>طلبك قيد المراجعة</strong>
+          <p>تم استلام بيانات الإيداع. سيتم التحقق وتفعيل البطاقة خلال 30 دقيقة. يمكنك إغلاق الصفحة.</p>
+        </div>`;
+    }, 1200);
+  });
+
+  /* ════════════════ PROFILE MODAL ════════════════ */
+  document.getElementById('profile-btn').addEventListener('click', openProfile);
+
+  function openProfile() {
+    document.getElementById('pm-name').value  = session.name;
+    document.getElementById('pm-email').value = session.email;
+    document.getElementById('pm-pw').value    = '';
+    document.getElementById('pm-avatar').textContent = session.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+    document.getElementById('pm-id-val').textContent = '#' + (session.id || '—');
+    ['pm-name-err','pm-email-err','pm-pw-err'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent=''; });
+    document.getElementById('pm-global-err').textContent = '';
+    document.getElementById('pm-global-err').hidden = true;
+    document.getElementById('profile-modal').hidden = false;
+  }
+  window.closeProfile = function() {
+    document.getElementById('profile-modal').hidden = true;
   };
 
-  function showToast(msg) {
-    const t = document.createElement('div');
-    t.className = 'sp-toast';
-    t.innerHTML = `
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#10b981"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>${msg}</span>`;
-    document.body.appendChild(t);
-    requestAnimationFrame(() => t.classList.add('sp-toast--show'));
-    setTimeout(() => { t.classList.remove('sp-toast--show'); setTimeout(() => t.remove(), 400); }, 5000);
-  }
+  document.getElementById('profile-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const newName  = document.getElementById('pm-name').value.trim();
+    const newEmail = document.getElementById('pm-email').value.trim().toLowerCase();
+    const pw       = document.getElementById('pm-pw').value;
+
+    let ok = true;
+    if (newName.length < 2) { document.getElementById('pm-name-err').textContent  = 'أدخل الاسم الكامل'; ok = false; }
+    else                      document.getElementById('pm-name-err').textContent  = '';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) { document.getElementById('pm-email-err').textContent = 'بريد إلكتروني غير صالح'; ok = false; }
+    else document.getElementById('pm-email-err').textContent = '';
+    if (!pw) { document.getElementById('pm-pw-err').textContent = 'كلمة المرور مطلوبة'; ok = false; }
+    else      document.getElementById('pm-pw-err').textContent = '';
+    if (!ok) return;
+
+    const btn  = document.getElementById('pm-save-btn');
+    const btxt = document.getElementById('pm-btn-text');
+    const bldr = document.getElementById('pm-btn-ldr');
+    btn.disabled = true; btxt.hidden = true; bldr.hidden = false;
+
+    const hash  = await hashPw(pw);
+    const users = getUsers();
+    const idx   = users.findIndex(u => u.id === session.id && u.hash === hash);
+
+    btn.disabled = false; btxt.hidden = false; bldr.hidden = true;
+
+    if (idx === -1) {
+      const err = document.getElementById('pm-global-err');
+      err.textContent = 'كلمة المرور غير صحيحة.';
+      err.hidden = false;
+      return;
+    }
+
+    // Check email not taken by another user
+    if (newEmail !== session.email && users.some((u, i) => i !== idx && u.email === newEmail)) {
+      const err = document.getElementById('pm-global-err');
+      err.textContent = 'هذا البريد الإلكتروني مستخدم من قِبل حساب آخر.';
+      err.hidden = false;
+      return;
+    }
+
+    users[idx].name  = newName;
+    users[idx].email = newEmail;
+    saveUsers(users);
+
+    // Update session
+    session.name  = newName;
+    session.email = newEmail;
+    localStorage.setItem('sp_session', JSON.stringify(session));
+
+    // Refresh UI
+    const newInitials = newName.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+    document.getElementById('nav-avatar').textContent    = newInitials;
+    document.getElementById('nav-name').textContent      = newName;
+    document.getElementById('greeting-name').textContent = newName.split(' ')[0];
+    document.getElementById('card-holder').textContent   = newName.toUpperCase();
+
+    closeProfile();
+    showToast('تم تحديث الملف الشخصي بنجاح!');
+  });
   </script>
 </body>
 </html>
