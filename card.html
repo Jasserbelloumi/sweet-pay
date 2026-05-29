@@ -241,6 +241,24 @@
                   <span class="df-err" id="df-txid-err"></span>
                 </div>
 
+                <!-- CAPTCHA -->
+                <div class="captcha-box" id="df-captcha-box">
+                  <div class="captcha-box__label">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l5 2v4.5c0 3-5 6.5-5 6.5S3 11 3 8V3.5l5-2z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    التحقق الأمني
+                  </div>
+                  <div class="captcha-box__inner">
+                    <div class="captcha-question" id="df-captcha-q"></div>
+                    <div class="captcha-input-wrap">
+                      <input type="number" id="df-captcha-input" class="captcha-input" placeholder="الجواب" autocomplete="off"/>
+                      <button type="button" class="captcha-refresh" id="df-captcha-refresh" title="سؤال جديد">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M13.5 8A5.5 5.5 0 112.5 5M2.5 2v3h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <span class="captcha-err" id="df-captcha-err"></span>
+                </div>
+
                 <div class="df-global-err" id="df-global-err"></div>
 
                 <button type="submit" class="ap-confirm-btn" id="df-submit-btn">
@@ -579,6 +597,43 @@
     closeProfile();
     showToast('تم تحديث الملف الشخصي بنجاح!');
   });
+  </script>
+  <script src="assets/js/captcha.js"></script>
+  <script>
+    /* ── Deposit CAPTCHA init ── */
+    let dfCaptcha = null;
+    /* Init when deposit form becomes visible */
+    const _dfObserver = new MutationObserver(() => {
+      const wrap = document.getElementById('deposit-form-wrap');
+      if (wrap && !wrap.hidden && !dfCaptcha) {
+        dfCaptcha = SweetCaptcha('df-captcha-q', 'df-captcha-refresh');
+        _dfObserver.disconnect();
+      }
+    });
+    _dfObserver.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['hidden'] });
+
+    /* Also try to init right now in case it's already visible */
+    window.addEventListener('DOMContentLoaded', () => {
+      const wrap = document.getElementById('deposit-form-wrap');
+      if (wrap && !wrap.hidden) {
+        dfCaptcha = SweetCaptcha('df-captcha-q', 'df-captcha-refresh');
+      }
+    });
+
+    /* Patch deposit form to run CAPTCHA check */
+    (function patchDepositForm() {
+      const origSubmit = document.getElementById('deposit-form')?.onsubmit;
+      document.getElementById('deposit-form')?.addEventListener('submit', function patchCheck(e) {
+        /* This runs BEFORE the main submit listener (added in the inline script above) */
+        /* We just need to inject captcha check at the top — but since listener order matters,
+           we intercept via a global flag instead */
+        window._dfCaptchaOk = true;
+        if (dfCaptcha) {
+          window._dfCaptchaOk = dfCaptcha.verify('df-captcha-input', 'df-captcha-err');
+          if (!window._dfCaptchaOk) e.stopImmediatePropagation();
+        }
+      }, true); /* capture phase → runs first */
+    })();
   </script>
 </body>
 </html>
