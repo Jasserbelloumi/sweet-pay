@@ -649,19 +649,23 @@ input, button { font-family: inherit; }
 .auth-switch-btn:hover { text-decoration: underline; }
 
 /* ── Nav user pill ── */
-.nav__user {
+.nav__user,
+.nav__user-pill {
   display: flex; align-items: center; gap: 10px;
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 50px; padding: 5px 14px 5px 5px;
   cursor: pointer; position: relative; transition: border-color .2s;
+  text-decoration: none; color: var(--text);
 }
-.nav__user:hover { border-color: var(--gold); }
+.nav__user:hover,
+.nav__user-pill:hover { border-color: var(--gold); }
 .nav__user-avatar {
   width: 30px; height: 30px; border-radius: 50%;
   background: linear-gradient(135deg, var(--gold), var(--gold-dark));
   display: flex; align-items: center; justify-content: center;
   font-size: 0.7rem; font-weight: 800; color: #0a0700; flex-shrink: 0;
 }
+.nav__user-pill span { font-size: 0.8125rem; font-weight: 600; }
 .nav__user-name { font-size: 0.8125rem; font-weight: 600; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .nav__user-caret { color: var(--text-3); flex-shrink: 0; }
 
