@@ -186,3 +186,40 @@ input, select, textarea { font-family: inherit; }
 /* ── Responsive ── */
 @media (max-width: 960px) { .card-layout { grid-template-columns: 1fr; } .vcard { max-width: 440px; } }
 @media (max-width: 540px) { .ap-includes__list { grid-template-columns: 1fr; } .ap-methods { grid-template-columns: 1fr; } .df-row { grid-template-columns: 1fr; } .cmain { padding: 24px 16px 48px; } .cnav__profile-btn span { display: none; } }
+
+/* ── CAPTCHA ── */
+.captcha-box {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;
+}
+.captcha-box__label {
+  display: flex; align-items: center; gap: 6px;
+  font-size: .72rem; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: .04em;
+}
+.captcha-box__inner { display: flex; align-items: center; gap: 10px; }
+.captcha-question {
+  flex: 1; display: flex; align-items: center; gap: 8px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 14px; font-family: 'Space Grotesk', monospace;
+  user-select: none; pointer-events: none;
+}
+.cq-num  { font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+.cq-op   { font-size: 1rem;   font-weight: 600; color: var(--text-2); }
+.cq-eq   { font-size: 1rem;   font-weight: 600; color: var(--text-2); }
+.cq-mark { font-size: 1.1rem; font-weight: 800; color: var(--text); }
+.captcha-input-wrap { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.captcha-input {
+  width: 72px; height: 42px; background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text); font-size: .95rem; font-weight: 600; text-align: center;
+  outline: none; transition: border-color .2s;
+}
+.captcha-input::-webkit-inner-spin-button,
+.captcha-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.captcha-input:focus { border-color: var(--gold); }
+.captcha-refresh {
+  width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface-2); color: var(--text-2); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all .2s;
+}
+.captcha-refresh:hover { border-color: var(--gold); color: var(--gold); }
+.captcha-err { font-size: .73rem; color: var(--red); min-height: 14px; }
