@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sweet Pay — SweetCoin Exchange</title>
+  <meta name="description" content="Sweet Pay is the fastest, most secure platform to convert SweetCoin (SWC) into Sweet Pay (SWP) instantly." />
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="#" class="nav__logo">
+        <span class="nav__logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="url(#lg1)"/><path d="M10 16.5C10 13.462 12.462 11 15.5 11H19a3 3 0 010 6h-3.5a1.5 1.5 0 000 3H19" stroke="#fff" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="lg1" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>
+        </span>
+        <span>Sweet<strong>Pay</strong></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#rates">Live Rates</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="#exchange" class="btn btn--ghost">Log In</a>
+        <a href="#exchange" class="btn btn--primary">Get Started</a>
+      </div>
+      <button class="nav__burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobile-menu">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#rates">Live Rates</a>
+      <a href="#faq">FAQ</a>
+      <a href="#exchange" class="btn btn--primary">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__bg">
+      <div class="hero__orb hero__orb--1"></div>
+      <div class="hero__orb hero__orb--2"></div>
+      <div class="hero__orb hero__orb--3"></div>
+      <div class="hero__grid"></div>
+    </div>
+    <div class="container">
+      <div class="hero__inner">
+        <div class="hero__text" data-animate="fade-up">
+          <div class="hero__badge">
+            <span class="badge__dot"></span>
+            Live Exchange · Zero Hidden Fees
+          </div>
+          <h1 class="hero__title">
+            Exchange <span class="gradient-text">SweetCoin</span><br/>
+            Into Real Value
+          </h1>
+          <p class="hero__subtitle">
+            Sweet Pay is the fastest, most transparent platform to convert SweetCoin (SWC) to Sweet Pay (SWP). Instant settlements, institutional-grade security, and the best rates on the market.
+          </p>
+          <div class="hero__cta">
+            <a href="#exchange" class="btn btn--primary btn--lg">Start Exchanging</a>
+            <a href="#how" class="btn btn--ghost btn--lg">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5L10 8l-3.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Watch Demo
+            </a>
+          </div>
+          <div class="hero__trust">
+            <div class="trust__item">
+              <strong>$2.4B+</strong>
+              <span>Total Volume</span>
+            </div>
+            <div class="trust__divider"></div>
+            <div class="trust__item">
+              <strong>180K+</strong>
+              <span>Active Users</span>
+            </div>
+            <div class="trust__divider"></div>
+            <div class="trust__item">
+              <strong>99.98%</strong>
+              <span>Uptime SLA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXCHANGE WIDGET -->
+        <div class="widget" id="exchange" data-animate="fade-left">
+          <div class="widget__header">
+            <h3>Exchange Now</h3>
+            <div class="widget__rate-badge">
+              <span class="rate__live"></span>
+              Live Rate
+            </div>
+          </div>
+
+          <div class="widget__body">
+            <div class="field">
+              <label class="field__label">You Send</label>
+              <div class="field__input-wrap">
+                <input type="number" id="swc-input" class="field__input" placeholder="0.00" value="1000" />
+                <div class="field__token">
+                  <span class="token__icon token__icon--swc">SWC</span>
+                  <span class="token__name">SweetCoin</span>
+                </div>
+              </div>
+              <div class="field__balance">Balance: <span id="swc-balance">25,400.00</span> SWC</div>
+            </div>
+
+            <button class="swap-btn" id="swap-btn" title="Swap currencies">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7l-3 3 3 3M15 13l3-3-3-3M2 10h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+
+            <div class="field">
+              <label class="field__label">You Receive</label>
+              <div class="field__input-wrap">
+                <input type="number" id="swp-output" class="field__input field__input--output" placeholder="0.00" readonly />
+                <div class="field__token">
+                  <span class="token__icon token__icon--swp">SWP</span>
+                  <span class="token__name">SweetPay</span>
+                </div>
+              </div>
+              <div class="field__balance">Balance: <span id="swp-balance">0.00</span> SWP</div>
+            </div>
+
+            <div class="widget__info">
+              <div class="info__row">
+                <span>Exchange Rate</span>
+                <span id="rate-display"><strong>1 SWC</strong> = <strong class="gradient-text" id="rate-val">0.842</strong> SWP</span>
+              </div>
+              <div class="info__row">
+                <span>Network Fee</span>
+                <span class="info__green">Free</span>
+              </div>
+              <div class="info__row">
+                <span>Settlement</span>
+                <span>~30 seconds</span>
+              </div>
+              <div class="info__row">
+                <span>You Save</span>
+                <span class="info__green" id="save-val">$0.00 vs competitors</span>
+              </div>
+            </div>
+
+            <button class="btn btn--primary btn--full" id="exchange-btn">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1v16M1 9h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Exchange Now
+            </button>
+
+            <p class="widget__note">By exchanging, you agree to our <a href="#">Terms of Service</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker__track" id="ticker-track">
+      <div class="ticker__item"><span class="ticker__sym">SWC/SWP</span> <span class="ticker__price" id="t1">0.842</span> <span class="ticker__up">+2.14%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">SWC/USD</span> <span class="ticker__price">$0.038</span> <span class="ticker__up">+1.87%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">SWP/USD</span> <span class="ticker__price">$0.045</span> <span class="ticker__up">+0.94%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">SWC/BTC</span> <span class="ticker__price">0.0000008</span> <span class="ticker__up">+3.21%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">SWC/ETH</span> <span class="ticker__price">0.000014</span> <span class="ticker__down">-0.55%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">SWP/BTC</span> <span class="ticker__price">0.00000095</span> <span class="ticker__up">+1.32%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">Volume 24H</span> <span class="ticker__price">$48.7M</span> <span class="ticker__up">+12.4%</span></div>
+      <!-- duplicated for infinite scroll -->
+      <div class="ticker__item"><span class="ticker__sym">SWC/SWP</span> <span class="ticker__price">0.842</span> <span class="ticker__up">+2.14%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">SWC/USD</span> <span class="ticker__price">$0.038</span> <span class="ticker__up">+1.87%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">SWP/USD</span> <span class="ticker__price">$0.045</span> <span class="ticker__up">+0.94%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">SWC/BTC</span> <span class="ticker__price">0.0000008</span> <span class="ticker__up">+3.21%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">SWC/ETH</span> <span class="ticker__price">0.000014</span> <span class="ticker__down">-0.55%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">SWP/BTC</span> <span class="ticker__price">0.00000095</span> <span class="ticker__up">+1.32%</span></div>
+      <div class="ticker__item"><span class="ticker__sym">Volume 24H</span> <span class="ticker__price">$48.7M</span> <span class="ticker__up">+12.4%</span></div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section__header" data-animate="fade-up">
+        <div class="section__label">Why Sweet Pay</div>
+        <h2 class="section__title">Built for <span class="gradient-text">speed</span> and <span class="gradient-text">trust</span></h2>
+        <p class="section__desc">Every feature is designed to give you the fastest, safest, and most transparent SweetCoin exchange experience.</p>
+      </div>
+      <div class="features__grid">
+        <div class="feature-card" data-animate="fade-up" style="--delay: 0s">
+          <div class="feature-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Instant Settlement</h3>
+          <p>Exchanges settle in under 30 seconds. No waiting, no uncertainty — your SWP lands immediately.</p>
+        </div>
+        <div class="feature-card" data-animate="fade-up" style="--delay: 0.1s">
+          <div class="feature-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Bank-Grade Security</h3>
+          <p>256-bit AES encryption, cold wallet storage, and multi-factor authentication protect every transaction.</p>
+        </div>
+        <div class="feature-card" data-animate="fade-up" style="--delay: 0.2s">
+          <div class="feature-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Real-Time Rates</h3>
+          <p>Our oracle pulls live data from 12 exchanges simultaneously, guaranteeing you always get the best rate.</p>
+        </div>
+        <div class="feature-card" data-animate="fade-up" style="--delay: 0.3s">
+          <div class="feature-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Zero Hidden Fees</h3>
+          <p>What you see is exactly what you get. No conversion fees, no spread markups — completely transparent pricing.</p>
+        </div>
+        <div class="feature-card" data-animate="fade-up" style="--delay: 0.4s">
+          <div class="feature-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>All Devices</h3>
+          <p>Web, iOS, and Android — exchange SweetCoin anywhere, anytime with our native apps and progressive web platform.</p>
+        </div>
+        <div class="feature-card" data-animate="fade-up" style="--delay: 0.5s">
+          <div class="feature-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Referral Rewards</h3>
+          <p>Earn 0.5% of every exchange your referrals make — forever. Build passive income with your network.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section--dark" id="how">
+    <div class="container">
+      <div class="section__header" data-animate="fade-up">
+        <div class="section__label">Process</div>
+        <h2 class="section__title">Three steps to <span class="gradient-text">exchange</span></h2>
+        <p class="section__desc">From SweetCoin to Sweet Pay in less than a minute — no paperwork, no delays.</p>
+      </div>
+      <div class="steps">
+        <div class="step" data-animate="fade-up" style="--delay: 0s">
+          <div class="step__number">01</div>
+          <div class="step__content">
+            <h3>Connect Your Wallet</h3>
+            <p>Link your SweetCoin wallet securely. We support all major wallet types including hardware wallets.</p>
+          </div>
+        </div>
+        <div class="step__arrow">
+          <svg width="40" height="16" viewBox="0 0 40 16" fill="none"><path d="M0 8h38M32 2l6 6-6 6" stroke="url(#ag)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="ag" x1="0" y1="8" x2="40" y2="8" gradientUnits="userSpaceOnUse"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>
+        </div>
+        <div class="step" data-animate="fade-up" style="--delay: 0.15s">
+          <div class="step__number">02</div>
+          <div class="step__content">
+            <h3>Set Your Amount</h3>
+            <p>Enter how much SWC you want to exchange. See live rates, final SWP amount, and estimated fees instantly.</p>
+          </div>
+        </div>
+        <div class="step__arrow">
+          <svg width="40" height="16" viewBox="0 0 40 16" fill="none"><path d="M0 8h38M32 2l6 6-6 6" stroke="url(#ag2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="ag2" x1="0" y1="8" x2="40" y2="8" gradientUnits="userSpaceOnUse"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>
+        </div>
+        <div class="step" data-animate="fade-up" style="--delay: 0.3s">
+          <div class="step__number">03</div>
+          <div class="step__content">
+            <h3>Receive Sweet Pay</h3>
+            <p>Confirm the transaction and watch SWP land in your wallet in seconds. That's it — simple, fast, done.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE RATES -->
+  <section class="section" id="rates">
+    <div class="container">
+      <div class="section__header" data-animate="fade-up">
+        <div class="section__label">Markets</div>
+        <h2 class="section__title">Live <span class="gradient-text">Exchange Rates</span></h2>
+        <p class="section__desc">Real-time market data updated every 5 seconds.</p>
+      </div>
+      <div class="rates-table" data-animate="fade-up">
+        <div class="rates-table__header">
+          <span>Pair</span>
+          <span>Price</span>
+          <span>24H Change</span>
+          <span>Volume</span>
+          <span>Action</span>
+        </div>
+        <div class="rates-table__body" id="rates-body">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section stats-section">
+    <div class="container">
+      <div class="stats__grid">
+        <div class="stat-card" data-animate="fade-up" style="--delay:0s">
+          <div class="stat-card__value" data-count="2400000000">$2.4B</div>
+          <div class="stat-card__label">Total Volume Processed</div>
+        </div>
+        <div class="stat-card" data-animate="fade-up" style="--delay:0.1s">
+          <div class="stat-card__value" data-count="180000">180K+</div>
+          <div class="stat-card__label">Registered Users</div>
+        </div>
+        <div class="stat-card" data-animate="fade-up" style="--delay:0.2s">
+          <div class="stat-card__value">99.98%</div>
+          <div class="stat-card__label">Platform Uptime</div>
+        </div>
+        <div class="stat-card" data-animate="fade-up" style="--delay:0.3s">
+          <div class="stat-card__value">&lt;30s</div>
+          <div class="stat-card__label">Average Settlement Time</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section__header" data-animate="fade-up">
+        <div class="section__label">Community</div>
+        <h2 class="section__title">Trusted by <span class="gradient-text">thousands</span></h2>
+      </div>
+      <div class="testimonials" data-animate="fade-up">
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p>"Sweet Pay completely changed how I manage my SweetCoin. The exchange speed is unreal — 30 seconds every single time."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">AK</div>
+            <div>
+              <strong>Ahmad K.</strong>
+              <span>Crypto Trader, Dubai</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p>"No other platform even comes close to the rate transparency Sweet Pay offers. I've saved hundreds in hidden fees switching to them."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">SL</div>
+            <div>
+              <strong>Sara L.</strong>
+              <span>DeFi Investor, Paris</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p>"I handle large-volume exchanges daily. Sweet Pay's institutional API is rock-solid and their support team actually responds."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">MR</div>
+            <div>
+              <strong>Marco R.</strong>
+              <span>Fund Manager, Milan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section__header" data-animate="fade-up">
+        <div class="section__label">Help</div>
+        <h2 class="section__title">Frequently asked <span class="gradient-text">questions</span></h2>
+      </div>
+      <div class="faq__list" data-animate="fade-up">
+        <div class="faq__item">
+          <button class="faq__question">
+            What is Sweet Pay?
+            <svg class="faq__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq__answer">Sweet Pay is a real-time currency exchange platform that converts SweetCoin (SWC) into Sweet Pay (SWP) tokens — instantly, securely, and with no hidden fees.</div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            What is the exchange rate?
+            <svg class="faq__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq__answer">The rate fluctuates live based on market conditions. Our oracle aggregates data from 12 exchanges to give you the best available rate at all times. Currently 1 SWC ≈ 0.842 SWP.</div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            Are there any fees?
+            <svg class="faq__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq__answer">No. Sweet Pay charges zero platform fees. Network gas fees may apply depending on the blockchain, but we always show you the exact cost upfront — no surprises.</div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            How long does an exchange take?
+            <svg class="faq__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq__answer">Most exchanges settle in under 30 seconds. During high network congestion, this can extend to a few minutes, but never hours.</div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            Is Sweet Pay secure?
+            <svg class="faq__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq__answer">Absolutely. We use 256-bit AES encryption, cold wallet storage for 95% of funds, mandatory 2FA, and regular third-party security audits. Your assets are always protected.</div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            What wallets are supported?
+            <svg class="faq__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq__answer">Sweet Pay is compatible with MetaMask, Trust Wallet, Ledger, Trezor, WalletConnect-compatible wallets, and all major SweetCoin native wallets.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card" data-animate="fade-up">
+        <div class="cta-card__bg"></div>
+        <div class="cta-card__content">
+          <h2>Ready to exchange your <span class="gradient-text">SweetCoin?</span></h2>
+          <p>Join 180,000+ users already using Sweet Pay. No account required to get started.</p>
+          <div class="cta-card__actions">
+            <a href="#exchange" class="btn btn--primary btn--lg">Start Now — It's Free</a>
+            <a href="#features" class="btn btn--ghost btn--lg">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="#" class="nav__logo">
+            <span class="nav__logo-icon">
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="url(#lg2)"/><path d="M10 16.5C10 13.462 12.462 11 15.5 11H19a3 3 0 010 6h-3.5a1.5 1.5 0 000 3H19" stroke="#fff" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>
+            </span>
+            Sweet<strong>Pay</strong>
+          </a>
+          <p>The fastest way to convert SweetCoin to Sweet Pay. Institutional-grade infrastructure for everyone.</p>
+          <div class="footer__socials">
+            <a href="#" aria-label="Twitter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.254 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" aria-label="Telegram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.504-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </a>
+            <a href="#" aria-label="Discord">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.112 18.1.13 18.114a19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="#">Exchange</a></li>
+              <li><a href="#">Live Rates</a></li>
+              <li><a href="#">API Docs</a></li>
+              <li><a href="#">Mobile App</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press Kit</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Status Page</a></li>
+              <li><a href="#">Community</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Terms</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Security</a></li>
+              <li><a href="#">Compliance</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 Sweet Pay. All rights reserved.</p>
+        <p class="footer__disclaimer">Not financial advice. Cryptocurrency is subject to market risk.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal" id="success-modal">
+    <div class="modal__overlay" id="modal-overlay"></div>
+    <div class="modal__box">
+      <div class="modal__icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="url(#mlg)"/><path d="M14 24l7 7 13-14" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="mlg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>
+      </div>
+      <h3>Exchange Initiated!</h3>
+      <p id="modal-msg">Your SWC is being converted to SWP. Estimated arrival: <strong>~30 seconds</strong></p>
+      <button class="btn btn--primary btn--full" id="modal-close">Done</button>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
